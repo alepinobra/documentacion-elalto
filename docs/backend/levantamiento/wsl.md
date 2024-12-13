@@ -2,9 +2,9 @@
 
 ## 1. Habilitar Características de Windows
 
-Activar en "Windows Features":
-- Virtual Machine Platform
-- Windows Hypervisor Platform
+#### Activar en "Windows Features":
+1. Virtual Machine Platform
+2. Windows Hypervisor Platform
 
 ## 2. Instalar WSL
 

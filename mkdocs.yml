@@ -12,6 +12,9 @@ theme:
     - content.action.view
     - content.action.versions
     - navigation.footer
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
   palette:
     # dark mode
     - scheme: slate
@@ -54,6 +57,8 @@ markdown_extensions:
             format: !!python/name:pymdownx.superfences.fence_code_format  
 
 extra:
+  annotate:
+    json: [.s2]
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/ElAlto23
@@ -78,7 +83,8 @@ nav:
       - Draft Mode: backend/sap/draft.md
     - Tracmin:
       - API Viajes: backend/tracmin/api-viajes.md
-      - API Guías: backend/tracmin/api-guias.md
+      - API Crear Guías: backend/tracmin/crear-guias.md
+      - API Cancelar Guías: backend/tracmin/cancel-guias.md
   - Frontend:
     - Next.js:
       - Introducción: frontend/react/que-es-react.md

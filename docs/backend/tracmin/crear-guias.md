@@ -3,6 +3,32 @@
 ## Descripción General
 Endpoint para la creación y gestión de guías de despacho integrando SAP, Febos y base de datos interna.
 
+??? info "Notas Importantes"
+    - El sistema verifica la existencia de guías previas antes de crear una nueva
+    - Se realiza una doble validación de folios para evitar duplicados tanto en SAP como en Febos
+    - Los campos de peso (NETO, TARA, BRUT) deben ser consistentes entre sí
+    - El sistema maneja zonas horarias, convirtiendo automáticamente entre hora local (Chile) y UTC
+    - Se mantiene un registro detallado de estados yerrores en GuiaStatus
+    - Las notificaciones WebPubSub son enviadas automáticamente al completar el proceso
+    - Los errores en cualquier etapa son registrados y pueden ser consultados posteriormente
+    - El proceso es transaccional: si falla en cualquier punto, se revierten los cambios
+    - Se requiere autenticación (JWT) para acceder al endpoint
+    - Los documentos generados cumplen con la normativa del SII (Servicio de Impuestos Internos)
+    - El sistema maneja automáticamente la reconexión en caso de fallos de red
+    - Los tiempos de respuesta pueden variar dependiendo de la disponibilidad de SAP y Febos
+
+??? info "Consideraciones de Rendimiento"
+    - Las consultas a SAP y Febos son asíncronas para optimizar tiempos de respuesta
+    - Se implementa un sistema de retry para manejar fallos temporales de conexión
+    - Los documentos pesados (como XMLs) son manejados en memoria de forma eficiente
+    - Se mantiene un pool de conexiones a la base dedatos para mejor rendimiento
+
+??? info "Seguridad"
+    - Todas las comunicaciones con SAP y Febos son encriptadas
+    - Se validan todos los inputs para prevenir inyecciones SQL y XSS
+    - Los tokens y credenciales son manejados de forma segura
+    - Se mantiene un log de auditoría de todas las operaciones
+
 ## Endpoint Para Crear Guías
 `POST /api/logipath/sap_guides`
 
@@ -34,6 +60,58 @@ Endpoint para la creación y gestión de guías de despacho integrando SAP, Febo
     - `Actualización de ActualTrip con folio y datos de ubicación`
     - `Actualización final de GuiaStatus`
     - `Envío de notificación WebPubSub`
+
+    ```json title="Estructura de la Guía" 
+    linenums="1"
+    {
+        "DocType": "string",
+        "CardCode": "string",
+        "Address": "string",
+        "DocTotal": "number",
+        "Comments": "string",
+        "JournalMemo": "string",
+        "ShipToCode": "string",
+        "Indicator": "string",
+        "FolioPrefixString": "string",
+        "ControlAccount": "string",
+        "U_SEI_PTT": "string",
+        "U_SEI_RTCH": "string",
+        "U_SEI_RTTR": "string",
+        "U_SEI_NCHF": "string",
+        "U_SEI_IND": "string",
+        "U_SEI_DocGuiaEnt": "number",
+        "U_SEI_ROMAN": "string",
+        "U_SEI_ROMA": "string",
+        "U_SEI_PATE": "string",
+        "U_SEI_FEBOSID": "string",
+        "U_SEI_HUME": "number",
+        "U_SEI_TEMP": "number",
+        "U_SEI_NETO": "number",
+        "U_SEI_TARA": "number",
+        "U_SEI_BRUT": "number",
+        "U_SEI_CANB": "number",
+        "LineNum": "number",
+        "ItemCode": "string",
+        "Quantity": "number",
+        "Price": "number",
+        "Currency": "string",
+        "WarehouseCode": "string",
+        "AccountCode": "string",
+        "InventoryQuantity": "number",
+        "CardName": "string",
+        "ItemDescription": "string",
+        "U_SEI_ITRS": "number",
+        "DocDueDate": "string",
+        "Address2": "string",
+        "IdViaje": "number",
+        "IdProgramado": "number",
+        "RutConductor": "string",
+        "HoraInicioJornada": "datetime",
+        "Longitud": "number",
+        "Latitud": "number",
+        "HoraFolio": "datetime"
+    }
+    ```
 
 === "Estados de GuiaStatus"
 
@@ -202,13 +280,3 @@ Endpoint para la creación y gestión de guías de despacho integrando SAP, Febo
             API-->>Client: Respuesta final
         end
     ```
------
-
-## Endpoint Para Cancelar Guías
-`POST /api/logipath/cancel_guide`
-
-=== "Flujo Explicado"
-
-=== "Estados de GuiaStatus"
-
-=== "Flujo Diagrama"
