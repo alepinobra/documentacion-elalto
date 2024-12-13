@@ -1,0 +1,65 @@
+site_name: My Docs
+site_url: https://github.com/
+
+theme:
+  name: material
+  logo: https://static.wixstatic.com/media/ad57ff_3de8a9731924436a98c2a4b3ad291894~mv2.png/v1/fill/w_191,h_91,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logotipo_sin%20borde.png
+  font:
+    text: Merriweather Sans
+    code: Red Hat Mono
+  features:
+    - content.action.edit
+    - content.action.view
+    - content.action.versions
+    - navigation.footer
+  palette:
+    # dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark Mode
+      primary: green
+      accent: deep-purple
+
+    # light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light Mode
+      primary: blue
+      accent: deep-purple
+
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences  
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.superfences:
+        custom_fences:
+          - name: mermaid
+            class: mermaid
+            format: !!python/name:pymdownx.superfences.fence_code_format  
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ElAlto23
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/
+    - icon: material/web
+      link: https://www.gestionelalto.cl/
+
+copyright: Copyright &copy; 2025 Desarrollo El Alto
