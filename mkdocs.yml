@@ -1,4 +1,4 @@
-site_name: My Docs
+site_name: Documentación El Alto
 site_url: https://github.com/
 
 theme:
@@ -63,3 +63,36 @@ extra:
       link: https://www.gestionelalto.cl/
 
 copyright: Copyright &copy; 2025 Desarrollo El Alto
+
+nav:
+  - Home: index.md
+  - Backend:
+    - Levantamiento: 
+      - Windows: backend/levantamiento/windows.md
+      - Linux: backend/levantamiento/linux.md
+      - WSL: backend/levantamiento/wsl.md
+    - SAP Business Layer: 
+      - Introducción: backend/sap/que-es-sap.md
+      - Levantar: backend/sap/levantar.md
+      - Postman: backend/sap/postman.md
+      - Draft Mode: backend/sap/draft.md
+    - Tracmin:
+      - API Viajes: backend/tracmin/api-viajes.md
+      - API Guías: backend/tracmin/api-guias.md
+  - Frontend:
+    - Next.js:
+      - Introducción: frontend/react/que-es-react.md
+      - Levantar: frontend/react/levantar.md
+    - React Native:
+      - Introducción: frontend/react/que-es-react-native.md
+      - Levantar: frontend/react/levantar-react-native.md
+    - Tracmin:
+      - Introducción: frontend/tracmin/que-es-tracmin.md
+      - Next.js:
+        - Admin:
+          - Dashboard: frontend/tracmin/admin/dashboard.md
+        - User:
+          - Login: frontend/tracmin/user/login.md
+      - React Native:
+        - User:
+          - Login: frontend/tracmin/user/login.md
