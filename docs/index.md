@@ -1,10 +1,8 @@
 <div id="header" align="center">
-	<h1>Bienvenido a la Documentación del Equipo de Desarrollo El Alto 🚀</h1>
+	<h1>Documentación de Equipo de Desarrollo El Alto 🚀</h1>
 	<h3>Aquí podrás encontrar la documentación de todas las apps disponibles: frontend, backend y guías de cómo se fueron levantando los distintos servicios.</h3>
 	<img src="https://i.giphy.com/25UxpWoNBu8nOtURm9.webp" width="200"/>
 </div>
-
----
 
 <div align="center">
 	<h2>🛠️ Tecnologías Implementadas</h2>

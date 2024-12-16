@@ -124,3 +124,48 @@ Endpoint para la cancelación de guías de despacho integrando SAP y base de dat
     %% Success path
     M --> O[API Response Success]
     ```
+
+=== "Flujo Sequence"
+
+    ```mermaid
+    sequenceDiagram
+        participant Client
+        participant API
+        participant DB
+        participant SAP
+        participant WebPubSub
+
+        Client->>API: POST /cancel_guide
+        
+        API->>DB: Verificar GuiaStatus
+        DB-->>API: Estado de guía
+        
+        alt Guía no existe
+            API-->>Client: Error: Guía no encontrada
+        else Guía existe
+            API->>SAP: Login SAP
+            
+            alt Login Error
+                API->>DB: Registrar error_login_sap
+                API-->>Client: Error: Login SAP fallido
+            else Login Success
+                API->>SAP: Buscar Guía
+                
+                alt Guía no encontrada en SAP
+                    API->>DB: Registrar error_guia_no_encontrada
+                    API-->>Client: Error: Guía no existe en SAP
+                else Guía encontrada
+                    API->>SAP: Crear Return Document
+                    
+                    alt Error en Return
+                        API->>DB: Registrar error_proceso_cancelacion
+                        API-->>Client: Error: Fallo en cancelación
+                    else Return Success
+                        API->>DB: Actualizar estado a guia_anulada
+                        API->>WebPubSub: Notificar cancelación
+                        API-->>Client: Success: Guía anulada correctamente
+                    end
+                end
+            end
+        end
+    ```

@@ -61,8 +61,7 @@ Endpoint para la creación y gestión de guías de despacho integrando SAP, Febo
     - `Actualización final de GuiaStatus`
     - `Envío de notificación WebPubSub`
 
-    ```json title="Estructura de la Guía" 
-    linenums="1"
+    ```json title="Estructura de la Guía" linenums="1"
     {
         "DocType": "string",
         "CardCode": "string",
@@ -237,7 +236,7 @@ Endpoint para la creación y gestión de guías de despacho integrando SAP, Febo
         T --> Y
         X --> Y
     ```
-
+=== "Flujo Sequence"
     ```mermaid
     sequenceDiagram
         autonumber
