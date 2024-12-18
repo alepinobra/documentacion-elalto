@@ -17,7 +17,6 @@ theme:
     - content.code.select
     - content.code.annotate
     - navigation.sections
-    - toc.integrate
     - navigation.top
 
   palette:
@@ -78,51 +77,41 @@ nav:
   - "🏠 Home": index.md
   - "Backend":
     - "🚀 Levantamiento": 
-      - "Windows": backend/levantamiento/windows.md
-      - "Linux": backend/levantamiento/linux.md
+      - "Windows Linux": backend/levantamiento/windows_linux.md
       - "WSL": backend/levantamiento/wsl.md
-    - "🌐 Ambientes":
-      - "Pruebas": backend/ambientes/pruebas.md
-      - "Dev": backend/ambientes/dev.md
-      - "Prod": backend/ambientes/prod.md
+    - "🌐 Ambientes": backend/ambientes.md
     - "💼 SAP Business Layer": 
       - "Introducción": backend/sap/que-es-sap.md
-      - "Levantar": backend/sap/levantar.md
       - "Postman": backend/sap/postman.md
       - "Draft Mode": backend/sap/draft.md
-    - "🔌 Websocket":
-      - "Introducción": backend/websocket/intro.md
-      - "Levantar": backend/websocket/levantar.md
-      - "Conexiones": backend/websocket/conexiones.md
+    - "🔌 Websocket": backend/websocket.md
     - "🚛 Tracmin":
       - "Estructura": backend/tracmin/estructura.md
-      - "API Seguridad": backend/tracmin/seguridad.md
-      - "API Viajes":
-        - "Post Trip": backend/tracmin/viajes/api-viajes.md
-        - "Post Trip Tara": backend/tracmin/viajes/post-trip-tara.md
-        - "Post Crear Viajes": backend/tracmin/viajes/crear-viaje.md
+      - "Seguridad": backend/tracmin/seguridad.md
+      - "Viajes":
+        - "Trip": backend/tracmin/viajes/api-viajes.md
+        - "Trip Tara": backend/tracmin/viajes/post-trip-tara.md
+        - "Crear Viajes": backend/tracmin/viajes/crear-viaje.md
         - "Buscar Cancelado": backend/tracmin/viajes/buscar-cancelado.md
-      - "API Fotos":
-        - "Post Fotos": backend/tracmin/fotos/upload_photo.md
-        - "Post IA": backend/tracmin/fotos/procesamiento_ia.md
+        - "Programados/Realizados": backend/tracmin/viajes/programados_realizados.md
+        - "Pendientes": backend/tracmin/viajes/pendientes.md
+      - "Fotos":
+        - "Upload Fotos": backend/tracmin/fotos/upload_photo.md
+        - "Procesamiento IA": backend/tracmin/fotos/procesamiento_ia.md
         - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
-      - "API Guías":
+      - "Guías":
         - "Crear Guías": backend/tracmin/guías/crear-guias.md
         - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
+        - "Correo": backend/tracmin/guías/correo.md
+      - "Crear/Modificar/Consultar":
+        - "Usuarios": backend/tracmin/admin/usuarios.md
+        - "Transportistas": backend/tracmin/admin/transportistas.md
+        - "Camiones": backend/tracmin/admin/camiones.md
+        - "Clientes": backend/tracmin/admin/clientes.md
+      - "Combustible": backend/tracmin/combustible.md
+      - "GPS": backend/tracmin/gps.md
   - "Frontend":
-    - "⚛️ Next.js":
-      - "Introducción": frontend/react/que-es-react.md
-      - "Levantar": frontend/react/levantar.md
-    - "📱 React Native":
-      - "Introducción": frontend/react/que-es-react-native.md
-      - "Levantar": frontend/react/levantar-react-native.md
-    - "🚛 Tracmin":
-      - "Introducción": frontend/tracmin/que-es-tracmin.md
-      - "Next.js":
-        - "Admin":
-          - "Dashboard": frontend/tracmin/admin/dashboard.md
-        - "User":
-          - "Login": frontend/tracmin/user/login.md
-      - "React Native":
-        - "User":
-          - "Login": frontend/tracmin/user/login.md
+    - "⚛️ Next.js": frontend/react/levantar.md
+    - "📱 React Native": frontend/react/levantar-react-native.md
+    - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
+    - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md

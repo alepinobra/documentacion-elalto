@@ -1,88 +1,138 @@
-# Guía de Instalación y Configuración de WSL
+# 🐧 WSL: Linux en Windows
 
-## 1. Habilitar Características de Windows
+## 🎯 ¿Por qué WSL?
 
-#### Activar en "Windows Features":
-1. Virtual Machine Platform
-2. Windows Hypervisor Platform
+??? info "Ventajas de WSL"
+    - Entorno Linux nativo en Windows
+    - Mejor rendimiento para desarrollo
+    - Compatibilidad con herramientas Linux
+    - Integración perfecta con VS Code
+    - Acceso a archivos de Windows
 
-## 2. Instalar WSL
+## 🚀 Instalación y Configuración
 
-```powershell title="Instalar WSL" linenums="1"
-wsl --install
-```
+### 1️⃣ Preparación de Windows
 
-## 3. Configuración Inicial
+??? tip "Activar Características"
+    1. Abrir "Windows Features"
+    2. Activar:
+        - ✅ Virtual Machine Platform
+        - ✅ Windows Hypervisor Platform
+        - ✅ Windows Subsystem for Linux
 
-### Comandos básicos
-```bash title="Comandos útiles" linenums="1"
-pwd     # Ver directorio actual
-mkdir   # Crear carpeta
-code .  # Abrir Visual Studio Code
-```
+### 2️⃣ Instalación WSL
 
-### Instalar curl
-```bash title="Instalar curl" linenums="1"
-sudo apt-get install curl
-```
+=== "Método Rápido"
+    ```powershell
+    wsl --install
+    ```
 
-## 4. Instalación de Herramientas
+=== "Instalación Manual"
+    ```powershell
+    # 1. Habilitar WSL
+    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    
+    # 2. Habilitar Plataforma Virtual
+    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+    
+    # 3. Reiniciar Windows
+    
+    # 4. Establecer WSL 2 como predeterminado
+    wsl --set-default-version 2
+    ```
 
-=== "NVM y Node.js"
+## 🛠️ Herramientas Esenciales
 
-    ```bash title="Instalar NVM" linenums="1"
+### 3️⃣ Desarrollo
+
+=== "Node.js (NVM)"
+    ```bash
+    # Instalar NVM
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    
+    # Instalar Node.js
+    nvm install node
     ```
 
-    ```bash title="Instalar y usar Node.js" linenums="1"
-    nvm install node    # Instala la última versión
-    nvm use <version>   # Usar una versión específica
-    ```
-
-=== "Miniconda"
-
-    ```bash title="Descargar Miniconda" linenums="1"
+=== "Python (Miniconda)"
+    ```bash
+    # Descargar Miniconda
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    ```
-
-    ```bash title="Instalar Miniconda" linenums="1"
+    
+    # Instalar
     sh ./Miniconda3-latest-Linux-x86_64.sh
     ```
 
-    ```bash title="Instalar versión específica de Python" linenums="1"
-    conda install python=<version>
-    ```
-
-    Nota: Cuando ves `(base)` en tu terminal, indica que estás en el entorno base de conda.
-
-=== "Azure Functions Core Tools"
-
-    ```bash title="Instalar Azure Functions Core Tools" linenums="1"
+=== "Azure Tools"
+    ```bash
+    # Azure Functions Core Tools
     curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
     sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-    
     sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-$(lsb_release -cs)-prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/dotnetdev.list'
-    
     sudo apt-get update
     sudo apt-get install azure-functions-core-tools-4
     ```
 
-## 5. Configuración de Visual Studio Code
+## 📝 VS Code Integration
 
-1. Instalar la extensión "WSL" en VS Code
-2. Usar el comando `code .` desde WSL para abrir VS Code con integración WSL
+??? example "Configuración VS Code"
+    1. Instalar extensión "WSL"
+    2. Comandos útiles:
+        ```bash
+        # Abrir VS Code
+        code .
+        
+        # Abrir carpeta actual
+        code ./mi-proyecto
+        ```
 
-## 6. Azure CLI y ODBC
+## 🔍 Comandos Útiles
 
-Azure CLI y ODBC deberían estar disponibles por defecto en WSL. Para verificar:
+??? tip "Comandos Básicos"
+    | Comando | Descripción |
+    |---------|-------------|
+    | `pwd` | Directorio actual |
+    | `ls` | Listar archivos |
+    | `cd` | Cambiar directorio |
+    | `mkdir` | Crear carpeta |
+    | `touch` | Crear archivo |
 
-```bash title="Verificar Azure CLI" linenums="1"
-az --version
-az login    # Para iniciar sesión en Azure
-```
+??? tip "Comandos WSL"
+    | Comando | Descripción |
+    |---------|-------------|
+    | `wsl --list` | Ver distros instaladas |
+    | `wsl --status` | Estado de WSL |
+    | `wsl --shutdown` | Apagar WSL |
+    | `wsl --update` | Actualizar WSL |
 
-## Notas Adicionales
+## ⚙️ Acceso a Archivos
 
-- Para ejecutar funciones localmente, usar los comandos de Azure Functions como se describe en la guía de Windows
-- WSL proporciona un entorno Linux completo dentro de Windows
-- Se puede acceder a los archivos de Windows desde WSL en `/mnt/c/`
+??? info "Sistema de Archivos"
+    - **Windows desde WSL**: `/mnt/c/`
+    - **WSL desde Windows**: `\\wsl$\Ubuntu\home\usuario`
+
+## ✅ Verificación
+
+??? check "Lista de Verificación"
+    - [ ] WSL instalado y funcionando
+    - [ ] VS Code integrado
+    - [ ] Node.js/Python configurado
+    - [ ] Azure Tools instaladas
+    - [ ] Acceso a archivos Windows
+
+## ⚠️ Solución de Problemas
+
+??? warning "Problemas Comunes"
+    | Problema | Solución |
+    |----------|----------|
+    | WSL no inicia | `wsl --shutdown` y reiniciar |
+    | VS Code no conecta | Reinstalar extensión WSL |
+    | Permisos denegados | Usar `sudo` |
+    | Actualización fallida | `wsl --update` |
+
+## 📚 Recursos
+
+??? info "Enlaces Útiles"
+    - [Documentación oficial WSL](https://docs.microsoft.com/windows/wsl/)
+    - [VS Code con WSL](https://code.visualstudio.com/docs/remote/wsl)
+    - [Guía de inicio WSL](https://docs.microsoft.com/windows/wsl/setup/environment)
