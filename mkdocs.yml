@@ -115,3 +115,7 @@ nav:
     - "📱 React Native": frontend/react/levantar-react-native.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
     - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
+  - "Lógica de Negocio":
+    - "⛽ Combustible":
+      - "Entrada Mercancia": logica_negocio/combustible/entrada_mercancia.md
+      - "Creación de Guías": logica_negocio/combustible/guias.md
