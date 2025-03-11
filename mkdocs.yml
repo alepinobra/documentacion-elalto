@@ -80,6 +80,7 @@ nav:
       - "Windows Linux": backend/levantamiento/windows_linux.md
       - "WSL": backend/levantamiento/wsl.md
     - "🌐 Ambientes": backend/ambientes.md
+    - "🛢️ Gestion Base de Datos": backend/bases_de_datos/copias_seguridad.md
     - "💼 SAP Business Layer": 
       - "Introducción": backend/sap/que-es-sap.md
       - "Postman": backend/sap/postman.md
