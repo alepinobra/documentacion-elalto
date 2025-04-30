@@ -3,6 +3,10 @@
 ## Descripción General
 Sistema de gestión de pesaje y despacho que permite registrar y controlar el proceso de taraje, carga y despacho de camiones. Acceso exclusivo para administradores y operadores de romana.
 
+## Video Demostración
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z_ixNnSS9D4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ??? info "Notas Importantes"
     - Sistema CRUD para gestión de pesaje y despacho
     - Acceso restringido a administradores y operadores
@@ -208,5 +212,3 @@ En caso de que se pierda la conexión WebSocket en alguna de las aplicaciones (T
     - Todas las fallas de conexión se registran con timestamp y detalle del error en un log central accesible para monitoreo y análisis de incidencias
 
 > Este mecanismo asegura que ninguna aplicación se quede en un estado inconsistente ante fallas de red temporales, y permite continuar el flujo operativo una vez restaurada la conectividad. 
-
-### Video Demostración
