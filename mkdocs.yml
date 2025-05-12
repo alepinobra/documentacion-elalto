@@ -125,3 +125,5 @@ nav:
       - "Creación de Guías": logica_negocio/combustible/guias.md
     - "🧑🏻‍💻 Remotización Romana":
       - "Flujo Remotización": logica_negocio/romanaremota/flujo.md
+    - "🐣 Entrada y distribución de stock SAASS":
+      - "Flujo resumido": logica_negocio/SAASS/flujo.md
