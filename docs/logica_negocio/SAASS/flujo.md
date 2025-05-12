@@ -17,8 +17,7 @@ Puedes descargar un ejemplo de guía de transferencia de stock generada por el s
     Este documento es un ejemplo de una guía de despacho generada por el sistema. Contiene todos los campos relevantes como información del cliente, conductor, vehículo, producto, cantidades y valores.
 
 ## Video Demostración
-
-<iframe width="560" height="315" src="https://youtu.be/_wigjMO6KW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_wigjMO6KW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ??? info "Notas Importantes"
     - Sistema integrado con SAP Business Layer
