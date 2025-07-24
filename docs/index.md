@@ -70,7 +70,7 @@ merge qa tag: "v1.0.0"
     <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/tailwindcss/tailwindcss-original.svg" title="Tailwind" alt="Tailwind" width="40" height="40">&nbsp;
 </div>
 
-<div align="center">
+<!-- <div align="center">
     <h2>⚡ Comandos Útiles</h2>
 </div>
 
@@ -105,4 +105,4 @@ npm run start # Iniciar aplicación en producción
     <h2>🎩 Versiones y Análisis</h2>
     <p>Si quieres ver las versiones y análisis de las apps, dirígete a la siguiente Página:</p>
     <a href="https://desarrollo.streamlit.app/">Desarrollo El Alto</a>
-</div>
+</div> -->
