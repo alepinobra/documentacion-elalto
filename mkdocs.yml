@@ -75,50 +75,50 @@ copyright: Copyright &copy; 2025 Desarrollo El Alto
 
 nav:
   - "🏠 Home": index.md
-  # - "Backend":
-  #   - "🚀 Levantamiento": 
-  #     - "Windows Linux": backend/levantamiento/windows_linux.md
-  #     - "WSL": backend/levantamiento/wsl.md
-  #   - "🌐 Ambientes": backend/ambientes.md
-  #   - "🛢️ Gestion Base de Datos": backend/bases_de_datos/copias_seguridad.md
-  #   - "💼 SAP Business Layer": 
-  #     - "Introducción": backend/sap/que-es-sap.md
-  #     - "Postman": backend/sap/postman.md
-  #     - "Draft Mode": backend/sap/draft.md
-  #   - "🔌 Websocket": backend/websocket.md
-  #   - "🚛 Tracmin":
-  #     - "Estructura": backend/tracmin/estructura.md
-  #     - "Seguridad": backend/tracmin/seguridad.md
-  #     - "Viajes":
-  #       - "Trip": backend/tracmin/viajes/api-viajes.md
-  #       - "Trip Tara": backend/tracmin/viajes/post-trip-tara.md
-  #       - "Crear Viajes": backend/tracmin/viajes/crear-viaje.md
-  #       - "Buscar Cancelado": backend/tracmin/viajes/buscar-cancelado.md
-  #       - "Programados/Realizados": backend/tracmin/viajes/programados_realizados.md
-  #       - "Pendientes": backend/tracmin/viajes/pendientes.md
-  #     - "Fotos":
-  #       - "Upload Fotos": backend/tracmin/fotos/upload_photo.md
-  #       - "Procesamiento IA": backend/tracmin/fotos/procesamiento_ia.md
-  #       - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
-  #     - "Guías":
-  #       - "Crear Guías": backend/tracmin/guías/crear-guias.md
-  #       - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
-  #       - "Correo": backend/tracmin/guías/correo.md
-  #     - "Crear/Modificar/Consultar":
-  #       - "Usuarios": backend/tracmin/admin/usuarios.md
-  #       - "Transportistas": backend/tracmin/admin/transportistas.md
-  #       - "Camiones": backend/tracmin/admin/camiones.md
-  #       - "Clientes": backend/tracmin/admin/clientes.md
-  #     - "Combustible": backend/tracmin/combustible.md
-  #     - "GPS": backend/tracmin/gps.md
-  # - "Frontend":
-  #   - "⚛️ Next.js": frontend/react/levantar.md
-  #   - "📱 React Native": frontend/react/levantar-react-native.md
-  #   - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
-  #   - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
-  # - "IoT":
-  #   - "🔧 Configuración":
-  #     - "Azure": iot/configuracion/azure.md
+  - "Backend":
+    - "🚀 Levantamiento": 
+      - "Windows Linux": backend/levantamiento/windows_linux.md
+      - "WSL": backend/levantamiento/wsl.md
+    - "🌐 Ambientes": backend/ambientes.md
+    - "🛢️ Gestion Base de Datos": backend/bases_de_datos/copias_seguridad.md
+    - "💼 SAP Business Layer": 
+      - "Introducción": backend/sap/que-es-sap.md
+      - "Postman": backend/sap/postman.md
+      - "Draft Mode": backend/sap/draft.md
+    - "🔌 Websocket": backend/websocket.md
+    - "🚛 Tracmin":
+      - "Estructura": backend/tracmin/estructura.md
+      - "Seguridad": backend/tracmin/seguridad.md
+      - "Viajes":
+        - "Trip": backend/tracmin/viajes/api-viajes.md
+        - "Trip Tara": backend/tracmin/viajes/post-trip-tara.md
+        - "Crear Viajes": backend/tracmin/viajes/crear-viaje.md
+        - "Buscar Cancelado": backend/tracmin/viajes/buscar-cancelado.md
+        - "Programados/Realizados": backend/tracmin/viajes/programados_realizados.md
+        - "Pendientes": backend/tracmin/viajes/pendientes.md
+      - "Fotos":
+        - "Upload Fotos": backend/tracmin/fotos/upload_photo.md
+        - "Procesamiento IA": backend/tracmin/fotos/procesamiento_ia.md
+        - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
+      - "Guías":
+        - "Crear Guías": backend/tracmin/guías/crear-guias.md
+        - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
+        - "Correo": backend/tracmin/guías/correo.md
+      - "Crear/Modificar/Consultar":
+        - "Usuarios": backend/tracmin/admin/usuarios.md
+        - "Transportistas": backend/tracmin/admin/transportistas.md
+        - "Camiones": backend/tracmin/admin/camiones.md
+        - "Clientes": backend/tracmin/admin/clientes.md
+      - "Combustible": backend/tracmin/combustible.md
+      - "GPS": backend/tracmin/gps.md
+  - "Frontend":
+    - "⚛️ Next.js": frontend/react/levantar.md
+    - "📱 React Native": frontend/react/levantar-react-native.md
+    - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
+    - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
+  - "IoT":
+    - "🔧 Configuración":
+      - "Azure": iot/configuracion/azure.md
   - "Lógica de Negocio":
     - "⛽ Combustible":
       - "Entrada Mercancia": logica_negocio/combustible/entrada_mercancia.md
