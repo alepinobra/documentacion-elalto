@@ -86,7 +86,15 @@ nav:
       - "Postman": backend/sap/postman.md
       - "Draft Mode": backend/sap/draft.md
     - "🔌 Websocket": backend/websocket.md
-    - "🚛 Tracmin":
+    - "💬 WhatsApp": 
+      - "Introducción": backend/whatsapp.md
+      - "Webhook con IA":
+        - "Arquitectura": backend/whatsapp/arquitectura.md
+        - "Flujo de Mensajes": backend/whatsapp/flujo-mensajes.md
+        - "Sistema de Agentes": backend/whatsapp/sistema-agentes.md
+        - "Seguridad": backend/whatsapp/seguridad.md
+        - "MCP y Database": backend/whatsapp/mcp-database.md
+    - "�🚛 Tracmin":
       - "Estructura": backend/tracmin/estructura.md
       - "Seguridad": backend/tracmin/seguridad.md
       - "Viajes":
