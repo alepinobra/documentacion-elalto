@@ -123,6 +123,7 @@ nav:
     - "⛽ Combustible":
       - "Entrada Mercancia": logica_negocio/combustible/entrada_mercancia.md
       - "Creación de Guías": logica_negocio/combustible/guias.md
+      - "Ingreso Documentos": logica_negocio/combustible/ingreso_documento_combustible.md
     - "🧑🏻‍💻 Remotización Romana":
       - "Flujo Remotización": logica_negocio/romanaremota/flujo.md
     - "🐣 Entrada y distribución de stock SAASS":
