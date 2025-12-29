@@ -93,6 +93,7 @@ nav:
         - "Trip": backend/tracmin/viajes/api-viajes.md
         - "Trip Tara": backend/tracmin/viajes/post-trip-tara.md
         - "Crear Viajes": backend/tracmin/viajes/crear-viaje.md
+        - "Cerrar Viajes": backend/tracmin/viajes/cerrar-viajes.md 
         - "Buscar Cancelado": backend/tracmin/viajes/buscar-cancelado.md
         - "Programados/Realizados": backend/tracmin/viajes/programados_realizados.md
         - "Pendientes": backend/tracmin/viajes/pendientes.md
