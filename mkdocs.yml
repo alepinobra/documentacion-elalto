@@ -94,7 +94,11 @@ nav:
         - "Sistema de Agentes": backend/whatsapp/sistema-agentes.md
         - "Seguridad": backend/whatsapp/seguridad.md
         - "MCP y Database": backend/whatsapp/mcp-database.md
-    - "�🚛 Tracmin":
+    - "🚪 Control de Acceso (Backend)":
+        - "Arquitectura": backend/control-acceso/arquitectura.md
+        - "Autenticación y Seguridad": backend/control-acceso/autenticacion.md
+        - "API Endpoints": backend/control-acceso/api-endpoints.md
+    - "🚛 Tracmin":
       - "Estructura": backend/tracmin/estructura.md
       - "Seguridad": backend/tracmin/seguridad.md
       - "Viajes":
@@ -124,6 +128,10 @@ nav:
     - "📱 React Native": frontend/react/levantar-react-native.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
     - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
+    - "🚪 Control de Acceso":
+      - "Arquitectura": frontend/control-acceso/arquitectura.md
+      - "Pantallas y Flujos": frontend/control-acceso/pantallas.md
+      - "Integraciones IoT": frontend/control-acceso/integraciones-iot.md
   - "IoT":
     - "🔧 Configuración":
       - "Azure": iot/configuracion/azure.md
