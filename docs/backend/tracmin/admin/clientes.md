@@ -1,6 +1,87 @@
 # API Clientes - Documentación
 
 ## Descripción General
+Sistema de gestión de clientes que permite consultar información de clientes registrados en el sistema.
+
+??? info "Notas Importantes"
+    - Requiere autenticación JWT para todas las operaciones
+    - Solo lectura (consulta de clientes)
+    - Modelo principal:
+        ```python title="modelos"
+        class Client(BaseModel):
+            Codigo: str
+            Nombre: str
+            Rut: str
+            Activo: bool
+            Latitud: float
+            Longitud: float
+        ```
+
+??? warning "Consideraciones de Seguridad"
+    - Validar permisos de usuario
+    - Proteger rutas sensibles
+    - No exponer información sensible
+
+??? tip "Mejores Prácticas"
+    - Validar el token antes de procesar
+    - Manejar errores de forma consistente
+    - Mantener consistencia en respuestas
+    - Documentar códigos de error
+
+## Endpoints Clientes
+- `POST /api/logipath/get_clients`
+
+=== "Endpoints"
+    ??? success "Consultar Clientes"
+        ```python title="POST /api/logipath/get_clients"
+        @router.post(f"{APP_PATH}/get_clients")
+        async def get_clients(sec: Annotated[str, Depends(security_scheme)]):
+            """
+            Obtiene todos los clientes disponibles.
+            Returns:
+                dict: {
+                    "results": [Lista de clientes]
+                }
+            """
+            # ...
+            return {
+                "results": [/* ... */]
+            }
+        ```
+
+=== "Sequence Diagram"
+    ```mermaid
+    sequenceDiagram
+        participant Cliente
+        participant API
+        participant DB
+        
+        Cliente->>API: POST /get_clients
+        API->>API: Validar JWT
+        API->>DB: Query Clientes
+        DB-->>API: Lista Clientes
+        API-->>Cliente: Results
+    ```
+
+=== "Ejemplo de Respuesta Exitosa"
+    ??? example "Consulta Exitosa"
+        ```json
+        {
+            "results": [
+                {
+                    "Codigo": "CL001",
+                    "Nombre": "Cliente Ejemplo",
+                    "Rut": "12345678-9",
+                    "Activo": true,
+                    "Latitud": -33.4569,
+                    "Longitud": -70.6483
+                }
+            ]
+        }
+        ```
+# API Clientes - Documentación
+
+## Descripción General
 Sistema de gestión de clientes que permite crear, modificar y consultar información de clientes en el sistema.
 
 ??? info "Notas Importantes"
