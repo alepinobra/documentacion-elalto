@@ -114,6 +114,7 @@ nav:
         - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
       - "Guías":
         - "Crear Guías": backend/tracmin/guías/crear-guias.md
+        - "Confirmar Guías": backend/tracmin/guías/confirmar-guias.md
         - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
         - "Correo": backend/tracmin/guías/correo.md
       - "Crear/Modificar/Consultar":
@@ -127,7 +128,9 @@ nav:
     - "⚛️ Next.js": frontend/react/levantar.md
     - "📱 React Native": frontend/react/levantar-react-native.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
-    - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
+    - "🚛 Tracmin":
+      - "¿Qué es Tracmin?": frontend/tracmin/que-es-tracmin.md
+      - "Confirmar Guías": frontend/tracmin/confirmar-guias.md
     - "🚪 Control de Acceso":
       - "Arquitectura": frontend/control-acceso/arquitectura.md
       - "Pantallas y Flujos": frontend/control-acceso/pantallas.md

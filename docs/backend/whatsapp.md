@@ -455,11 +455,11 @@ Revise el sistema inmediatamente.
             if trips:
                 response = "🚛 *Tus Viajes Activos:*\n\n"
                 for trip in trips:
-                    response += f"• Patente: {trip['patente']}\n"
-                    response += f"  Estado: {trip['estado']}\n"
-                    response += f"  Cliente: {trip['cliente']}\n\n"
+                    response += f"🚗 Patente: {trip['patente']}\n"
+                    response += f"📊 Estado: {trip['estado']}\n"
+                    response += f"👤 Cliente: {trip['cliente']}\n\n"
             else:
-                response = "No tienes viajes activos en este momento."
+                response = "✅ No tienes viajes activos en este momento."
             
             whatsapp.send_message(to=phone, message=response)
         
@@ -485,12 +485,12 @@ Para soporte, contacta a: soporte@tracmin.cl
                 response = f"""
 📄 *Tu Última Guía:*
 
-Folio: {guia['folio']}
-Cliente: {guia['cliente']}
-Estado: {guia['estado']}
-Fecha: {guia['fecha']}
+📋 Folio: {guia['folio']}
+👤 Cliente: {guia['cliente']}
+📊 Estado: {guia['estado']}
+📅 Fecha: {guia['fecha']}
 
-Link: {guia['datalink']}
+🔗 Link: {guia['datalink']}
                 """
             else:
                 response = "No se encontraron guías recientes."

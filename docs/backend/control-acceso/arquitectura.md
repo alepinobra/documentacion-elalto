@@ -1,139 +1,167 @@
 # 🏗️ Arquitectura del Backend
 
-## 📋 Descripción General
+??? info "Descripción General"
+    Backend desarrollado como **Azure Function** con **FastAPI** que gestiona el control de acceso a portones mediante dispositivos IoT Shelly. Proporciona APIs REST para autenticación, gestión de usuarios, control MQTT y sistema de invitados temporales.
 
-Backend desarrollado como **Azure Function** con **FastAPI** que gestiona el control de acceso a portones mediante dispositivos IoT Shelly. Proporciona APIs REST para autenticación, gestión de usuarios, control MQTT y sistema de invitados temporales.
+??? warning "Consideraciones de Arquitectura"
+    - Sistema serverless con Azure Functions
+    - Comunicación IoT mediante MQTT
+    - Autenticación JWT con tokens de 24 horas
+    - Base de datos SQL Server centralizada
 
-```mermaid
-graph TB
-    subgraph "Azure Cloud"
-        subgraph "Azure Functions"
-            FUNC[Azure Function Handler]
-            FASTAPI[FastAPI Application]
+=== "Diagrama General"
+    ```mermaid
+    graph TB
+        subgraph "Azure Cloud"
+            subgraph "Azure Functions"
+                FUNC[Azure Function Handler]
+                FASTAPI[FastAPI Application]
+            end
+            
+            subgraph "Application Layer"
+                ROUTERS[Routers]
+                SECURITY[Security Layer]
+                FUNCTIONS[Business Logic]
+            end
+            
+            subgraph "Data Layer"
+                ORM[SQLAlchemy ORM]
+                MODELS[Data Models]
+            end
+            
+            subgraph "External Services"
+                DB[(SQL Server)]
+                MQTT_BROKER[MQTT Broker]
+                GRAPH[Microsoft Graph API]
+            end
         end
         
-        subgraph "Application Layer"
-            ROUTERS[Routers]
-            SECURITY[Security Layer]
-            FUNCTIONS[Business Logic]
+        subgraph "Clients"
+            MOBILE[React Native App]
+            WEB[Web Clients]
         end
         
-        subgraph "Data Layer"
-            ORM[SQLAlchemy ORM]
-            MODELS[Data Models]
-        end
+        MOBILE --> FUNC
+        WEB --> FUNC
+        FUNC --> FASTAPI
+        FASTAPI --> ROUTERS
+        ROUTERS --> SECURITY
+        ROUTERS --> FUNCTIONS
+        FUNCTIONS --> ORM
+        ORM --> MODELS
+        MODELS --> DB
+        FUNCTIONS --> MQTT_BROKER
+        FUNCTIONS --> GRAPH
         
-        subgraph "External Services"
-            DB[(SQL Server)]
-            MQTT_BROKER[MQTT Broker]
-            GRAPH[Microsoft Graph API]
-        end
-    end
-    
-    subgraph "Clients"
-        MOBILE[React Native App]
-        WEB[Web Clients]
-    end
-    
-    MOBILE --> FUNC
-    WEB --> FUNC
-    FUNC --> FASTAPI
-    FASTAPI --> ROUTERS
-    ROUTERS --> SECURITY
-    ROUTERS --> FUNCTIONS
-    FUNCTIONS --> ORM
-    ORM --> MODELS
-    MODELS --> DB
-    FUNCTIONS --> MQTT_BROKER
-    FUNCTIONS --> GRAPH
-    
-    style FUNC fill:#0078D4
-    style FASTAPI fill:#009485
-    style DB fill:#CC2927
-    style MQTT_BROKER fill:#660066
-    style GRAPH fill:#00A4EF
-```
+        style FUNC fill:#0078D4
+        style FASTAPI fill:#009485
+        style DB fill:#CC2927
+        style MQTT_BROKER fill:#660066
+        style GRAPH fill:#00A4EF
+    ```
+
+=== "Capas del Sistema"
+    ## Arquitectura en Capas
+
+    ### 1. Capa de Presentación
+    - React Native App (móvil)
+    - Web Clients
+
+    ### 2. Capa de Azure Functions
+    - Azure Function Handler
+    - FastAPI Application
+    - ASGI Middleware
+
+    ### 3. Capa de Aplicación
+    - Routers (endpoints)
+    - Security Layer (JWT, Auth)
+    - Business Logic
+
+    ### 4. Capa de Datos
+    - SQLAlchemy ORM
+    - Data Models (Pydantic)
+
+    ### 5. Servicios Externos
+    - SQL Server Database
+    - MQTT Broker (Shelly IoT)
+    - Microsoft Graph API (correos)
 
 ## 🎯 Stack Tecnológico
 
-### Backend Framework
+=== "Backend Framework"
+    | Tecnología | Versión | Propósito |
+    |------------|---------|-----------|
+    | **Python** | 3.9+ | Lenguaje de programación |
+    | **FastAPI** | 0.104+ | Framework web async |
+    | **Azure Functions** | v4 | Serverless hosting |
+    | **Uvicorn** | Latest | ASGI server |
+    | **Pydantic** | 2.0+ | Validación de datos |
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **Python** | 3.9+ | Lenguaje de programación |
-| **FastAPI** | 0.104+ | Framework web async |
-| **Azure Functions** | v4 | Serverless hosting |
-| **Uvicorn** | Latest | ASGI server |
-| **Pydantic** | 2.0+ | Validación de datos |
+=== "Persistencia y ORM"
+    | Tecnología | Versión | Propósito |
+    |------------|---------|-----------|
+    | **SQLAlchemy** | 2.0+ | ORM para bases de datos |
+    | **pyodbc** | 4.0+ | Driver ODBC para SQL Server |
+    | **SQL Server** | 2019+ | Base de datos principal |
 
-### Persistencia y ORM
+=== "Seguridad y Autenticación"
+    | Tecnología | Versión | Propósito |
+    |------------|---------|-----------|
+    | **python-jose** | 3.3+ | Manejo de JWT |
+    | **passlib** | 1.7+ | Hash de contraseñas (bcrypt) |
+    | **python-multipart** | 0.0.6+ | Manejo de forms |
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **SQLAlchemy** | 2.0+ | ORM para bases de datos |
-| **pyodbc** | 4.0+ | Driver ODBC para SQL Server |
-| **SQL Server** | 2019+ | Base de datos principal |
+=== "Comunicación IoT"
+    | Tecnología | Versión | Propósito |
+    |------------|---------|-----------|
+    | **paho-mqtt** | 1.6+ | Cliente MQTT |
+    | **requests** | 2.31+ | HTTP client |
 
-### Seguridad y Autenticación
-
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **python-jose** | 3.3+ | Manejo de JWT |
-| **passlib** | 1.7+ | Hash de contraseñas (bcrypt) |
-| **python-multipart** | 0.0.6+ | Manejo de forms |
-
-### Comunicación IoT
-
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **paho-mqtt** | 1.6+ | Cliente MQTT |
-| **requests** | 2.31+ | HTTP client |
-
-### Servicios Externos
-
-| Servicio | Propósito |
-|----------|-----------|
-| **Microsoft Graph API** | Envío de correos |
-| **MQTT Broker** | Comunicación con dispositivos Shelly |
+=== "Servicios Externos"
+    | Servicio | Propósito |
+    |----------|-----------|
+    | **Microsoft Graph API** | Envío de correos |
+    | **MQTT Broker** | Comunicación con dispositivos Shelly |
 
 ## 📂 Estructura del Proyecto
 
-```
-AppControlAcceso/
-├── __init__.py                    # FastAPI app + Azure Function handler
-├── function.json                  # Configuración Azure Functions
-│
-├── config/                        # Configuración
-│   ├── __init__.py
-│   ├── config.py                 # Variables de entorno
-│   ├── security.py               # JWT, autenticación, login
-│   ├── users.py                  # Gestión de usuarios
-│   └── health.py                 # Health check endpoint
-│
-├── routes/                        # Routers de FastAPI
-│   ├── __init__.py
-│   ├── portones.py               # CRUD de portones
-│   ├── mqtt.py                   # Control MQTT de dispositivos
-│   └── invitados.py              # CRUD de invitados
-│
-├── functions/                     # Lógica de negocio
-│   ├── __init__.py
-│   ├── invitados.py              # Generación de códigos
-│   └── mails.py                  # Envío de correos
-│
-├── schemas/                       # Pydantic schemas
-│   ├── __init__.py
-│   ├── login_schema.py           # Request/Response de login
-│   ├── invitados_schema.py       # Request/Response de invitados
-│   ├── mqtt_schema.py            # Request/Response de MQTT
-│   └── security_schema.py        # Token models
-│
-├── sql/                           # Scripts SQL
-│   └── *.sql
-│
-└── tests/                         # Tests unitarios
-    └── *.py
-```
+??? info "Árbol de Directorios"
+    ```
+    AppControlAcceso/
+    ├── __init__.py                    # FastAPI app + Azure Function handler
+    ├── function.json                  # Configuración Azure Functions
+    │
+    ├── config/                        # Configuración
+    │   ├── __init__.py
+    │   ├── config.py                 # Variables de entorno
+    │   ├── security.py               # JWT, autenticación, login
+    │   ├── users.py                  # Gestión de usuarios
+    │   └── health.py                 # Health check endpoint
+    │
+    ├── routes/                        # Routers de FastAPI
+    │   ├── __init__.py
+    │   ├── portones.py               # CRUD de portones
+    │   ├── mqtt.py                   # Control MQTT de dispositivos
+    │   └── invitados.py              # CRUD de invitados
+    │
+    ├── functions/                     # Lógica de negocio
+    │   ├── __init__.py
+    │   ├── invitados.py              # Generación de códigos
+    │   └── mails.py                  # Envío de correos
+    │
+    ├── schemas/                       # Pydantic schemas
+    │   ├── __init__.py
+    │   ├── login_schema.py           # Request/Response de login
+    │   ├── invitados_schema.py       # Request/Response de invitados
+    │   ├── mqtt_schema.py            # Request/Response de MQTT
+    │   └── security_schema.py        # Token models
+    │
+    ├── sql/                           # Scripts SQL
+    │   └── *.sql
+    │
+    └── tests/                         # Tests unitarios
+        └── *.py
+    ```
 
 ## 🔄 Flujo de Request
 
@@ -444,31 +472,54 @@ def get_el_alto():
 
 ## 🔒 Capas de Seguridad
 
-```mermaid
-graph TB
-    REQUEST[HTTP Request] --> LAYER1[1. Azure Functions Auth]
-    LAYER1 --> LAYER2[2. API Route]
-    LAYER2 --> LAYER3[3. JWT Validation]
-    LAYER3 --> LAYER4[4. Admin Check]
-    LAYER4 --> LAYER5[5. Business Logic]
-    LAYER5 --> RESPONSE[Response]
-    
-    LAYER1 -.anonymous.-> LAYER2
-    LAYER3 -.Bearer Token.-> LAYER4
-    LAYER4 -.admin flag.-> LAYER5
-    
-    style LAYER1 fill:#FFE5B4
-    style LAYER3 fill:#FFB6B6
-    style LAYER4 fill:#FF6B6B
-```
+=== "Diagrama de Seguridad"
+    ```mermaid
+    graph TB
+        REQUEST[HTTP Request] --> LAYER1[1. Azure Functions Auth]
+        LAYER1 --> LAYER2[2. API Route]
+        LAYER2 --> LAYER3[3. JWT Validation]
+        LAYER3 --> LAYER4[4. Admin Check]
+        LAYER4 --> LAYER5[5. Business Logic]
+        LAYER5 --> RESPONSE[Response]
+        
+        LAYER1 -.anonymous.-> LAYER2
+        LAYER3 -.Bearer Token.-> LAYER4
+        LAYER4 -.admin flag.-> LAYER5
+        
+        style LAYER1 fill:#FFE5B4
+        style LAYER3 fill:#FFB6B6
+        style LAYER4 fill:#FF6B6B
+    ```
 
-### Niveles de Seguridad
-
-1. **Azure Functions**: `authLevel: "anonymous"` (permite acceso directo)
-2. **FastAPI Routes**: Rutas públicas vs protegidas
-3. **JWT Validation**: `Depends(security_scheme)` valida token
-4. **Admin Check**: `decode_jwt(token, admin=1)` verifica permisos
-5. **Business Logic**: Validación de datos y reglas de negocio
+=== "Niveles de Seguridad"
+    ### 1. Azure Functions
+    `authLevel: "anonymous"` - Permite acceso directo sin autenticación de Azure
+    
+    ### 2. FastAPI Routes
+    - Rutas públicas: `/health`, `/login`
+    - Rutas protegidas: Requieren JWT válido
+    
+    ### 3. JWT Validation
+    `Depends(security_scheme)` - Valida token Bearer en headers
+    
+    ??? info "Ejemplo de Validación"
+        ```python
+        from fastapi import Depends, HTTPException
+        from fastapi.security import HTTPBearer
+        
+        security_scheme = HTTPBearer()
+        
+        async def validate_token(token: str = Depends(security_scheme)):
+            if not decode_jwt(token):
+                raise HTTPException(status_code=401)
+            return token
+        ```
+    
+    ### 4. Admin Check
+    `decode_jwt(token, admin=1)` - Verifica permisos administrativos
+    
+    ### 5. Business Logic
+    Validación de datos y reglas de negocio específicas
 
 ## 📊 Flujo de Datos Completo
 
@@ -544,106 +595,163 @@ class MqttStatus(str, Enum):
 
 ## 📈 Escalabilidad
 
-### Características de Escalabilidad
+=== "Diagrama de Escalabilidad"
+    ```mermaid
+    graph TB
+        subgraph "Azure Functions"
+            F1[Instance 1]
+            F2[Instance 2]
+            FN[Instance N]
+        end
+        
+        subgraph "Shared Resources"
+            DB[(SQL Server)]
+            MQTT[MQTT Broker]
+        end
+        
+        LB[Azure Load Balancer] --> F1
+        LB --> F2
+        LB --> FN
+        
+        F1 --> DB
+        F2 --> DB
+        FN --> DB
+        
+        F1 --> MQTT
+        F2 --> MQTT
+        FN --> MQTT
+        
+        style LB fill:#0078D4
+        style DB fill:#CC2927
+        style MQTT fill:#660066
+    ```
 
-```mermaid
-graph TB
-    subgraph "Azure Functions"
-        F1[Instance 1]
-        F2[Instance 2]
-        FN[Instance N]
-    end
+=== "Características"
+    ### Ventajas Implementadas
     
-    subgraph "Shared Resources"
-        DB[(SQL Server)]
-        MQTT[MQTT Broker]
-    end
+    ✅ **Stateless**
+    - Sin estado en memoria
+    - Todo persiste en base de datos
+    - Fácil escalado horizontal
     
-    LB[Azure Load Balancer] --> F1
-    LB --> F2
-    LB --> FN
+    ✅ **Auto-scaling**
+    - Azure Functions escala automáticamente
+    - Basado en demanda de requests
+    - Sin configuración manual
     
-    F1 --> DB
-    F2 --> DB
-    FN --> DB
+    ✅ **Connection Pooling**
+    - SQLAlchemy maneja pool de conexiones
+    - Reutilización eficiente de conexiones
+    - Reducción de overhead
     
-    F1 --> MQTT
-    F2 --> MQTT
-    FN --> MQTT
+    ✅ **MQTT Async**
+    - Conexiones MQTT son rápidas
+    - Desconexión inmediata post-publicación
+    - No bloquea recursos
     
-    style LB fill:#0078D4
-    style DB fill:#CC2927
-    style MQTT fill:#660066
-```
-
-### Consideraciones
-
-- ✅ **Stateless**: Sin estado en memoria, todo en DB
-- ✅ **Auto-scaling**: Azure Functions escala automáticamente
-- ✅ **Connection Pooling**: SQLAlchemy maneja pool de conexiones
-- ✅ **MQTT Async**: Conexiones MQTT son rápidas y desconectan inmediatamente
-- ⚠️ **Rate Limiting**: No implementado (considerar para producción)
-- ⚠️ **Caching**: No implementado (considerar Redis para queries frecuentes)
+    ### Mejoras Sugeridas
+    
+    ⚠️ **Rate Limiting**
+    - No implementado actualmente
+    - Considerar para producción
+    - Prevenir abuso de API
+    
+    ⚠️ **Caching**
+    - No implementado
+    - Considerar Redis para queries frecuentes
+    - Reducir carga en base de datos
 
 ## 🛠️ Deployment
 
-### Requisitos
+=== "Requisitos"
+    ??? info "requirements.txt"
+        ```bash
+        fastapi==0.104.1
+        uvicorn[standard]==0.24.0
+        azure-functions==1.17.0
+        sqlalchemy==2.0.23
+        pyodbc==5.0.1
+        python-jose[cryptography]==3.3.0
+        passlib[bcrypt]==1.7.4
+        paho-mqtt==1.6.1
+        pydantic==2.5.0
+        python-multipart==0.0.6
+        requests==2.31.0
+        ```
 
-```bash
-# requirements.txt
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-azure-functions==1.17.0
-sqlalchemy==2.0.23
-pyodbc==5.0.1
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-paho-mqtt==1.6.1
-pydantic==2.5.0
-python-multipart==0.0.6
-requests==2.31.0
-```
+=== "Azure Functions"
+    ### Publicar a Azure
+    
+    ```bash
+    # Publicar función
+    func azure functionapp publish <nombre-function-app>
+    
+    # Con configuración específica
+    func azure functionapp publish <nombre-function-app> \
+      --python \
+      --build remote
+    ```
+    
+    ??? warning "Prerequisitos"
+        - Azure Functions Core Tools instalado
+        - Azure CLI autenticado
+        - Function App creada en Azure Portal
 
-### Azure Functions Deployment
+=== "Variables de Entorno"
+    ### Configuración en Azure Portal
+    
+    **Ruta:** Function App > Configuration > Application Settings
+    
+    | Variable | Descripción |
+    |----------|-------------|
+    | `HASH_KEY` | Secret key para JWT |
+    | `USERS_KEY` | API key para endpoints protegidos |
+    | `SQL_SERVER` | Servidor SQL Server |
+    | `SQL_DATABASE` | Nombre base de datos (ElAltoDB) |
+    | `SQL_USERNAME` | Usuario base de datos |
+    | `SQL_PASSWORD` | Contraseña base de datos |
+    | `MQTT_BROKER` | URL broker MQTT |
+    | `MQTT_PORT` | Puerto broker (8883) |
+    | `MQTT_USER_ACCESO` | Usuario MQTT |
+    | `MQTT_PASS_ACCESO` | Contraseña MQTT |
+    | `MQTT_API_KEY` | API key endpoint MQTT |
+    | `GRAPH_CLIENT_ID` | Client ID Microsoft Graph |
+    | `GRAPH_CLIENT_SECRET` | Client Secret Microsoft Graph |
+    | `GRAPH_TENANT_ID` | Tenant ID Microsoft Graph |
+    
+    ??? info "Ejemplo de Configuración Local"
+        ```bash
+        # local.settings.json
+        {
+          "IsEncrypted": false,
+          "Values": {
+            "AzureWebJobsStorage": "",
+            "FUNCTIONS_WORKER_RUNTIME": "python",
+            "HASH_KEY": "tu-secret-key",
+            "USERS_KEY": "api-key",
+            "SQL_SERVER": "servidor.database.windows.net",
+            "SQL_DATABASE": "ElAltoDB",
+            "SQL_USERNAME": "usuario",
+            "SQL_PASSWORD": "password",
+            "MQTT_BROKER": "mqtt.broker.com",
+            "MQTT_PORT": "8883",
+            "MQTT_USER_ACCESO": "usuario-mqtt",
+            "MQTT_PASS_ACCESO": "password-mqtt",
+            "MQTT_API_KEY": "key-mqtt",
+            "GRAPH_CLIENT_ID": "client-id",
+            "GRAPH_CLIENT_SECRET": "client-secret",
+            "GRAPH_TENANT_ID": "tenant-id"
+          }
+        }
+        ```
 
-```bash
-# Publicar a Azure
-func azure functionapp publish <nombre-function-app>
+## Referencias
 
-# Con configuración específica
-func azure functionapp publish <nombre-function-app> \
-  --python \
-  --build remote
-```
-
-### Variables de Entorno
-
-Configurar en Azure Portal > Function App > Configuration:
-
-```
-Application Settings:
-- HASH_KEY
-- USERS_KEY
-- SQL_SERVER
-- SQL_DATABASE
-- SQL_USERNAME
-- SQL_PASSWORD
-- MQTT_BROKER
-- MQTT_PORT
-- MQTT_USER_ACCESO
-- MQTT_PASS_ACCESO
-- MQTT_API_KEY
-- GRAPH_CLIENT_ID
-- GRAPH_CLIENT_SECRET
-- GRAPH_TENANT_ID
-```
-
-## 📚 Próximos Pasos
-
-- [Autenticación y Seguridad](./autenticacion.md)
-- [API Endpoints](./api-endpoints.md)
-- [Integración MQTT](./mqtt-dispositivos.md)
-- [Base de Datos](./base-datos.md)
-- [Sistema de Invitados](./invitados.md)
+??? tip "Documentación Relacionada"
+    - [Autenticación y Seguridad](./autenticacion.md) - Sistema de JWT y permisos
+    - [API Endpoints](./api-endpoints.md) - Referencia completa de APIs
+    - [Integración MQTT](./mqtt-dispositivos.md) - Control de dispositivos IoT
+    - [Base de Datos](./base-datos.md) - Modelos y schemas
+    - [Sistema de Invitados](./invitados.md) - Gestión de accesos temporales
 
 
