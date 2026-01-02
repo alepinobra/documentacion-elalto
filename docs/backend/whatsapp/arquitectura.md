@@ -509,40 +509,52 @@ Sistema de mensajería inteligente basado en agentes de IA que permite a los usu
 
 ## Variables de Entorno
 
-??? info "Configuración del Servidor"
-    ```env
-    # Server
+??? info "Configuración Completa - .env"
+    ```
+    ### ============================================
+    ### SERVER CONFIGURATION
+    ### ============================================
     PORT=3000
-    ```
-
-??? info "Verificación Webhook"
-    ```env
-    # Webhook Verification
+    
+    ### ============================================
+    ### WEBHOOK VERIFICATION
+    ### ============================================
     VERIFY_TOKEN=your_verify_token
-    ```
-
-??? info "Kapso WhatsApp API"
-    ```env
-    # Kapso WhatsApp API
+    
+    ### ============================================
+    ### KAPSO WHATSAPP API
+    ### ============================================
     KAPSO_API_KEY=your_kapso_api_key
     KAPSO_API_URL=https://api.kapso.com
-    ```
-
-??? info "OpenAI Configuration"
-    ```env
-    # OpenAI
+    
+    ### ============================================
+    ### OPENAI CONFIGURATION
+    ### ============================================
     OPENAI_API_KEY=your_openai_api_key
-    ```
-
-??? info "Database Connection (MCP Server)"
-    ```env
-    # Database Connection (para MCP Server)
+    
+    ### ============================================
+    ### DATABASE CONNECTION (MCP SERVER)
+    ### ============================================
     DB_SERVER=your_server.database.windows.net
     DB_DATABASE=TracminDB
     DB_USER=your_username
     DB_PASSWORD=your_password
     DB_ENCRYPT=true
+    
     ```
+    
+    | Variable | Descripción | Requerido |
+    |----------|-------------|-----------|
+    | `PORT` | Puerto del servidor webhook | ✅ Sí |
+    | `VERIFY_TOKEN` | Token de verificación del webhook de Meta | ✅ Sí |
+    | `KAPSO_API_KEY` | API Key de Kapso WhatsApp Cloud | ✅ Sí |
+    | `KAPSO_API_URL` | URL base de la API de Kapso | ✅ Sí |
+    | `OPENAI_API_KEY` | API Key de OpenAI para agentes IA | ✅ Sí |
+    | `DB_SERVER` | Servidor SQL Server (MCP) | ✅ Sí |
+    | `DB_DATABASE` | Nombre de la base de datos | ✅ Sí |
+    | `DB_USER` | Usuario de la base de datos | ✅ Sí |
+    | `DB_PASSWORD` | Contraseña de la base de datos | ✅ Sí |
+    | `DB_ENCRYPT` | Cifrado de conexión a BD | ✅ Sí |
 
 ## Referencias
 

@@ -230,9 +230,11 @@ Sistema de chatbot inteligente basado en agentes de IA que permite a los usuario
 
 ## 🔔 Casos de Uso en Tracmin
 
+> ⚠️ **Nota Importante:** Los agentes de WhatsApp **NO pueden crear guías**. Solo envían notificaciones automáticas cuando una guía es creada por el sistema o por usuarios autorizados.
+
 ### 1️⃣ Notificación de Guía Creada
 
-??? example "Guía Generada"
+??? example "Guía Generada (Solo Notificación)"
     ```python
     async def notificar_guia_creada(
         phone: str,
@@ -241,17 +243,20 @@ Sistema de chatbot inteligente basado en agentes de IA que permite a los usuario
         conductor: str
     ):
         """
-        Notifica al conductor cuando se crea una guía
+        Notifica al conductor cuando una guía es creada por el sistema.
+        
+        IMPORTANTE: Esta función NO crea guías, solo envía una notificación
+        después de que la guía ha sido creada por otro proceso.
         """
         message = f"""
-✅ *Guía Generada Exitosamente*
+                ✅ *Guía Generada Exitosamente*
 
-📄 Folio: {folio}
-👤 Cliente: {cliente}
-🚚 Conductor: {conductor}
+                📄 Folio: {folio}
+                👤 Cliente: {cliente}
+                🚚 Conductor: {conductor}
 
-La guía ha sido generada y está lista para el despacho.
-        """
+                La guía ha sido generada y está lista para el despacho.
+                """
         
         whatsapp = WhatsAppService(
             token=WHATSAPP_API_TOKEN,
@@ -264,7 +269,7 @@ La guía ha sido generada y está lista para el despacho.
 ### 2️⃣ Actualización de Estado de Viaje
 
 ??? example "Estado de Viaje"
-    ```python
+    ```
     async def notificar_estado_viaje(
         phone: str,
         patente: str,
@@ -287,11 +292,10 @@ La guía ha sido generada y está lista para el despacho.
         emoji = estados_emoji.get(estado, "📢")
         
         message = f"""
-{emoji} *Actualización de Viaje*
-
-🚛 Patente: {patente}
-📊 Estado: {estado}
-"""
+            {emoji} *Actualización de Viaje*
+            🚛 Patente: {patente}
+            📊 Estado: {estado}
+            """
         
         if ubicacion:
             message += f"📍 Ubicación: {ubicacion}\n"
@@ -334,25 +338,31 @@ La guía ha sido generada y está lista para el despacho.
         
         emoji = severidad_emoji.get(severidad, "⚠️")
         
+        # Construir mensaje formateado
         message = f"""
-{emoji} *ALERTA DEL SISTEMA*
+            {emoji} *ALERTA DEL SISTEMA*
 
-🔧 Tipo: {tipo_alerta}
-📝 Descripción: {descripcion}
-⏰ Hora: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
+            🔧 *Tipo:* {tipo_alerta}
+            📝 *Descripción:* {descripcion}
+            ⏰ *Hora:* {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
 
-Revise el sistema inmediatamente.
-        """
+            ⚡ _Revise el sistema inmediatamente._
+            """
         
+        # Inicializar servicio de WhatsApp
         whatsapp = WhatsAppService(
             token=WHATSAPP_API_TOKEN,
             phone_number_id=WHATSAPP_PHONE_NUMBER_ID
         )
         
+        # Enviar alertas a todos los teléfonos
         resultados = []
         for phone in phones:
             try:
-                result = whatsapp.send_message(to=phone, message=message.strip())
+                result = whatsapp.send_message(
+                    to=phone, 
+                    message=message.strip()
+                )
                 resultados.append({
                     "phone": phone,
                     "status": "sent",
@@ -466,16 +476,17 @@ Revise el sistema inmediatamente.
         # Comando: AYUDA
         elif message_lower == "ayuda":
             response = """
-📱 *Comandos Disponibles:*
+                📱 *Comandos Disponibles:*
 
-• ESTADO - Ver tus viajes activos
-• GUIA - Información de tu última guía
-• UBICACION - Compartir tu ubicación
-• AYUDA - Ver este mensaje
+                • ESTADO - Ver tus viajes activos
+                • GUIA - Información de tu última guía
+                • UBICACION - Compartir tu ubicación
+                • AYUDA - Ver este mensaje
 
-Para soporte, contacta a: soporte@tracmin.cl
-            """
-            whatsapp.send_message(to=phone, message=response.strip())
+                Para soporte, contacta a: soporte@tracmin.cl
+
+                """
+        whatsapp.send_message(to=phone, message=response.strip())
         
         # Comando: GUIA
         elif message_lower == "guia":
@@ -483,14 +494,12 @@ Para soporte, contacta a: soporte@tracmin.cl
             
             if guia:
                 response = f"""
-📄 *Tu Última Guía:*
-
-📋 Folio: {guia['folio']}
-👤 Cliente: {guia['cliente']}
-📊 Estado: {guia['estado']}
-📅 Fecha: {guia['fecha']}
-
-🔗 Link: {guia['datalink']}
+                    📄 *Tu Última Guía:*
+                    📋 Folio: {guia['folio']}
+                    👤 Cliente: {guia['cliente']}
+                    📊 Estado: {guia['estado']}
+                    📅 Fecha: {guia['fecha']}
+                    🔗 Link: {guia['datalink']}
                 """
             else:
                 response = "No se encontraron guías recientes."
@@ -500,9 +509,8 @@ Para soporte, contacta a: soporte@tracmin.cl
         # Mensaje no reconocido
         else:
             response = """
-Hola 👋
-
-No entendí tu mensaje. Escribe *AYUDA* para ver los comandos disponibles.
+                Hola 👋
+                No entendí tu mensaje. Escribe *AYUDA* para ver los comandos disponibles.
             """
             whatsapp.send_message(to=phone, message=response.strip())
     ```
@@ -690,57 +698,6 @@ No entendí tu mensaje. Escribe *AYUDA* para ver los comandos disponibles.
             }
         }
     ```
-
-## 🔗 Integración con Otros Módulos
-
-### Con Viajes
-
-??? example "Notificaciones Automáticas"
-    ```python
-    # En post_trip endpoint
-    async def post_trip_with_whatsapp(trip_data, conductor_phone):
-        # Actualizar viaje
-        trip = await update_trip(trip_data)
-        
-        # Enviar notificación por WhatsApp
-        if conductor_phone:
-            await notificar_estado_viaje(
-                phone=conductor_phone,
-                patente=trip.patente,
-                estado=trip.estado,
-                ubicacion=f"{trip.latitud}, {trip.longitud}"
-            )
-        
-        # Enviar por WebSocket también
-        await webpubsub.send_to_all({
-            "type": "trip_updated",
-            "data": trip.dict()
-        })
-        
-        return trip
-    ```
-
-### Con Guías SAP
-
-??? example "Notificación de Guía"
-    ```python
-    # En sap_guides endpoint
-    async def create_guide_with_notification(guide_data, conductor_phone):
-        # Crear guía
-        guide = await create_sap_guide(guide_data)
-        
-        # Notificar por WhatsApp
-        if conductor_phone and guide.folio:
-            await notificar_guia_creada(
-                phone=conductor_phone,
-                folio=guide.folio,
-                cliente=guide.cliente,
-                conductor=guide.conductor
-            )
-        
-        return guide
-    ```
-
 ## 🛠️ Troubleshooting
 
 ??? warning "Errores Comunes"
