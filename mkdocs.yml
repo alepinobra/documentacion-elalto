@@ -86,6 +86,18 @@ nav:
       - "Postman": backend/sap/postman.md
       - "Draft Mode": backend/sap/draft.md
     - "🔌 Websocket": backend/websocket.md
+    - "💬 WhatsApp": 
+      - "Introducción": backend/whatsapp.md
+      - "Webhook con IA":
+        - "Arquitectura": backend/whatsapp/arquitectura.md
+        - "Flujo de Mensajes": backend/whatsapp/flujo-mensajes.md
+        - "Sistema de Agentes": backend/whatsapp/sistema-agentes.md
+        - "Seguridad": backend/whatsapp/seguridad.md
+        - "MCP y Database": backend/whatsapp/mcp-database.md
+    - "🚪 Control de Acceso (Backend)":
+        - "Arquitectura": backend/control-acceso/arquitectura.md
+        - "Autenticación y Seguridad": backend/control-acceso/autenticacion.md
+        - "API Endpoints": backend/control-acceso/api-endpoints.md
     - "🚛 Tracmin":
       - "Estructura": backend/tracmin/estructura.md
       - "Seguridad": backend/tracmin/seguridad.md
@@ -103,6 +115,7 @@ nav:
         - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
       - "Guías":
         - "Crear Guías": backend/tracmin/guías/crear-guias.md
+        - "Confirmar Guías": backend/tracmin/guías/confirmar-guias.md
         - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
         - "Correo": backend/tracmin/guías/correo.md
       - "Crear/Modificar/Consultar":
@@ -116,7 +129,13 @@ nav:
     - "⚛️ Next.js": frontend/react/levantar.md
     - "📱 React Native": frontend/react/levantar-react-native.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
-    - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
+    - "🚛 Tracmin":
+      - "¿Qué es Tracmin?": frontend/tracmin/que-es-tracmin.md
+      - "Confirmar Guías": frontend/tracmin/confirmar-guias.md
+    - "🚪 Control de Acceso":
+      - "Arquitectura": frontend/control-acceso/arquitectura.md
+      - "Pantallas y Flujos": frontend/control-acceso/pantallas.md
+      - "Integraciones IoT": frontend/control-acceso/integraciones-iot.md
   - "IoT":
     - "🔧 Configuración":
       - "Azure": iot/configuracion/azure.md
