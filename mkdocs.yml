@@ -139,6 +139,8 @@ nav:
   - "IoT":
     - "🔧 Configuración":
       - "Azure": iot/configuracion/azure.md
+    - "🐣 Contadores":
+      - "Contadores": iot/configuracion/contadores.md
   - "Lógica de Negocio":
     - "⛽ Combustible":
       - "Entrada Mercancia": logica_negocio/combustible/entrada_mercancia.md
