@@ -86,8 +86,6 @@ nav:
       - "Postman": backend/sap/postman.md
       - "Draft Mode": backend/sap/draft.md
     - "🔌 Websocket": backend/websocket.md
-    - "⛏️ Extracción":
-      - "WebSocket Excavadora": backend/extraccion/websocket-excavadora.md
     - "🚛 Tracmin":
       - "Estructura": backend/tracmin/estructura.md
       - "Seguridad": backend/tracmin/seguridad.md
@@ -105,6 +103,7 @@ nav:
         - "Subir Fotos Pendientes": backend/tracmin/fotos/upload_photo_pending.md
       - "Guías":
         - "Crear Guías": backend/tracmin/guías/crear-guias.md
+        - "Confirmar Guías": backend/tracmin/guías/confirmar-guias.md
         - "Cancelar Guías": backend/tracmin/guías/cancel-guias.md
         - "Correo": backend/tracmin/guías/correo.md
       - "Crear/Modificar/Consultar":
@@ -119,11 +118,11 @@ nav:
     - "📱 React Native": frontend/react/levantar-react-native.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
     - "🚛 Tracmin": frontend/tracmin/que-es-tracmin.md
-    - "⛏️ Extracción":
-      - "WebSocket Comunicación": frontend/extraccion/websocket-comunicacion.md
   - "IoT":
     - "🔧 Configuración":
       - "Azure": iot/configuracion/azure.md
+    - "🐣 Contadores":
+      - "Contadores": iot/configuracion/contadores.md
   - "Lógica de Negocio":
     - "⛽ Combustible":
       - "Entrada Mercancia": logica_negocio/combustible/entrada_mercancia.md
