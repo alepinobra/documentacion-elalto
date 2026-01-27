@@ -130,6 +130,9 @@ nav:
   - "Frontend":
     - "⚛️ Next.js": frontend/react/levantar.md
     - "📱 React Native": frontend/react/levantar-react-native.md
+    - "🔔 Knock Notifications":
+      - "Knock (React Native)": frontend/knock/knock-react-native.md
+      - "Knock (Next.js)": frontend/knock/knock-nextjs.md
     - "🆕 Actualizar Play Store": frontend/react/actualizar_native.md
     - "⛏️ Extracción":
       - "WebSocket Comunicación": frontend/extraccion/websocket-comunicacion.md
