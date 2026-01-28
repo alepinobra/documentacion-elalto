@@ -26,7 +26,7 @@ Variables de entorno (no subir secretos al repo):
 - Campos dinámicos en payloads:
   - `titulo`: Permite personalizar el título de la notificación desde el código (ej. `titulo: '❌ Conductor canceló viaje'`).
   - `descripcion`: El texto como `` `El conductor ${Nombre} ha cancelado el viaje #${viaje.Id}` `` se mapea a `descripcion` en el dashboard de Knock y se muestra en el feed; así personalizas el contenido sin crear channels nuevos.
-- `recipients`: Lista de destinatarios (p. ej. `{ id: 'diegoKnock' }`) para direccionar la notificación a usuarios o roles sin crear un channel por evento.
+- `recipients`: Lista de destinatarios (p. ej. `{ id: 'oruebaKnock' }`) para direccionar la notificación a usuarios o roles sin crear un channel por evento.
 
 > ⚠️ En el código del repo se usa un `fetch` directo a la API de Knock desde el cliente (`app/services/knock.ts`). Esto funciona, pero como buena práctica se recomienda ejecutar triggers de workflows que requieren `KNOCK_API_SECRET` desde un backend para **no exponer** secretos en la app.
 
@@ -73,7 +73,7 @@ await notificarSistema(
     motivo: 'Cancelado por conductor',
     fecha_cancelacion: new Date().toISOString(),
   },
-  [{ id: 'diegoKnock', name: 'Admin Principal' }]
+  [{ id: 'pruebaKnock', name: 'Admin Principal' }]
 );
 ```
 
@@ -104,7 +104,7 @@ cURL (server-side):
 curl -X POST "https://api.knock.app/v1/workflows/YOUR_WORKFLOW_KEY/trigger" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $KNOCK_API_SECRET" \
-  -d '{"data": {"titulo":"Conductor canceló viaje","viajeId":123}, "recipients":[{"id":"diegoKnock"}]}'
+  -d '{"data": {"titulo":"Conductor canceló viaje","viajeId":123}, "recipients":[{"id":"pruebaKnock"}]}'
 ```
 
 Fetch (desde backend Node):

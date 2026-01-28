@@ -34,7 +34,7 @@ El repo tiene un `KnockProviderWrapper` que lee la `apiKey` desde `process.env.N
 - Campos dinámicos en payloads:
   - `titulo`: Permite personalizar el título de la notificación desde el trigger (ej. `titulo: '❌ Conductor canceló viaje'`).
   - `descripcion`: El texto del mensaje (p. ej. `El conductor ${Nombre} ha cancelado el viaje #${viaje.Id}`) se muestra como `descripcion` en el dashboard de Knock y en los bloques de la notificación.
-- `recipients`: Puedes direccionar notificaciones a usuarios/roles (`{ id: 'diegoKnock' }`) sin crear canales separados por cada evento.
+- `recipients`: Puedes direccionar notificaciones a usuarios/roles (`{ id: 'pruebaKnock' }`) sin crear canales separados por cada evento.
 
 ### `NotificationBell`
 - Usa `useKnockFeed()` para obtener `feedClient`.
@@ -69,7 +69,7 @@ Si tu servicio backend debe disparar workflows en Knock:
 curl -X POST "https://api.knock.app/v1/workflows/YOUR_WORKFLOW_KEY/trigger" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $KNOCK_API_SECRET" \
-  -d '{"data": {...}, "recipients": [{"id":"diegoKnock"}] }'
+  -d '{"data": {...}, "recipients": [{"id":"pruebaKnock"}] }'
 ```
 
 ---
