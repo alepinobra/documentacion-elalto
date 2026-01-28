@@ -27,6 +27,15 @@ El repo tiene un `KnockProviderWrapper` que lee la `apiKey` desde `process.env.N
 </KnockProvider>
 ```
 
+## Puntos importantes de conexión con Knock 🔗
+
+- `KNOCK_FEED_ID`: Identificador del *feed in-app* (feedId / channel del feed usado por la UI web para mostrar notificaciones en el dashboard).
+- `KNOCK_EXPO_CHANNEL_ID`: Channel ID del canal de *push* (si también registras dispositivos móviles desde la web o integras con Expo).
+- Campos dinámicos en payloads:
+  - `titulo`: Permite personalizar el título de la notificación desde el trigger (ej. `titulo: '❌ Conductor canceló viaje'`).
+  - `descripcion`: El texto del mensaje (p. ej. `El conductor ${Nombre} ha cancelado el viaje #${viaje.Id}`) se muestra como `descripcion` en el dashboard de Knock y en los bloques de la notificación.
+- `recipients`: Puedes direccionar notificaciones a usuarios/roles (`{ id: 'diegoKnock' }`) sin crear canales separados por cada evento.
+
 ### `NotificationBell`
 - Usa `useKnockFeed()` para obtener `feedClient`.
 - Ejecuta `feed.fetch()` e intenta `feed.listenForUpdates()` para real-time.
@@ -82,4 +91,4 @@ curl -X POST "https://api.knock.app/v1/workflows/YOUR_WORKFLOW_KEY/trigger" \
 - `components/knock/NotificationBell.tsx`
 - `app/(LogiPath)/.../layout.tsx` (donde se usa `KnockProviderWrapper`)
 
-Si quieres, agrego una sección con ejemplos de payloads concretos que creemos en los workflows (bloques, templates, recipients) o screenshots de la UI de la campana. ✅
+

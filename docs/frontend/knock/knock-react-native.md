@@ -19,6 +19,15 @@ Variables de entorno (no subir secretos al repo):
 - `KNOCK_FEED_ID`
 - `KNOCK_EXPO_CHANNEL_ID`
 
+## Puntos importantes de conexión con Knock 🔗
+
+- `KNOCK_FEED_ID`: Identificador del *feed in-app* (feedId / channel del feed que se muestra dentro de la app). Usado por `KnockFeedProvider` para mostrar notificaciones en la UI.
+- `KNOCK_EXPO_CHANNEL_ID`: Channel ID del canal de *push* para Expo (usado por `user.setChannelData` para registrar tokens y enviar push a dispositivos).
+- Campos dinámicos en payloads:
+  - `titulo`: Permite personalizar el título de la notificación desde el código (ej. `titulo: '❌ Conductor canceló viaje'`).
+  - `descripcion`: El texto como `` `El conductor ${Nombre} ha cancelado el viaje #${viaje.Id}` `` se mapea a `descripcion` en el dashboard de Knock y se muestra en el feed; así personalizas el contenido sin crear channels nuevos.
+- `recipients`: Lista de destinatarios (p. ej. `{ id: 'diegoKnock' }`) para direccionar la notificación a usuarios o roles sin crear un channel por evento.
+
 > ⚠️ En el código del repo se usa un `fetch` directo a la API de Knock desde el cliente (`app/services/knock.ts`). Esto funciona, pero como buena práctica se recomienda ejecutar triggers de workflows que requieren `KNOCK_API_SECRET` desde un backend para **no exponer** secretos en la app.
 
 ---
@@ -127,4 +136,4 @@ await fetch(`https://api.knock.app/v1/workflows/${workflowKey}/trigger`, {
 
 ---
 
-Si quieres, agrego screenshots o más ejemplos de payloads de datos según los workflows que tengan definidos en Knock. ✅
+
